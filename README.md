@@ -81,4 +81,4 @@ Note:
 I always stay away from loan / morgage or credit cards etc, and absolutely hate these instruments apart form just maintaining good CIBIL credit score.
 
 
-![alt text](image.png)
+![alt text](image-1.png)
