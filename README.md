@@ -74,4 +74,8 @@ This project provides an **Advanced Mortgage Calculator** that allows users to c
 
 ---
 
-Developed by: **schnaror@gmail.com**
+Developed over ginger tea in weekend by: **schnaror@gmail.com**
+
+Note:
+
+I always stay away from loan / morgage or credit cards etc, and absolutely hate these instruments apart form just maintaining good CIBIL credit score.
