@@ -9,6 +9,7 @@ This project provides an **Advanced Mortgage Calculator** that allows users to c
 - Dynamic interest rate adjustment based on credit score and property type.
 - Inclusion of property tax rate and annual home insurance in the calculation.
 - Displays detailed results including:
+
   - Adjusted interest rate.
   - Monthly principal and interest payment.
   - Monthly property tax.
@@ -17,15 +18,18 @@ This project provides an **Advanced Mortgage Calculator** that allows users to c
   - Total loan cost including interest.
 
 ## Technologies Used
+
 - **HTML5**: For structure and layout.
 - **CSS3**: For styling.
 - **Bootstrap 5**: For responsive design and UI components.
 - **JavaScript**: For dynamic calculations.
 
 ## Usage
+
 1. Clone the repository or download the HTML file.
-2. Open the file `index.html` in any modern web browser.
+2. Open the file `loanapp.html` in any web browser.
 3. Fill in the required fields:
+
    - Loan Amount
    - Annual Interest Rate
    - Loan Term
@@ -33,9 +37,11 @@ This project provides an **Advanced Mortgage Calculator** that allows users to c
    - Property Type
    - Property Tax Rate
    - Annual Home Insurance
+
 4. Click the "Calculate Mortgage" button to see the results.
 
 ## Calculation Logic
+
 - **Adjusted Interest Rate**: Base interest rate adjusted for credit score and property type.
 - **Monthly Principal and Interest**: Calculated using the formula:
 
@@ -53,7 +59,8 @@ This project provides an **Advanced Mortgage Calculator** that allows users to c
 - **Total Loan Cost**: Sum of all monthly payments over the loan term.
 
 ## File Structure
-- `index.html`: Main HTML file with embedded CSS and JavaScript.
+
+- `loanapp.html`: Main HTML file with embedded CSS and JavaScript.
 - **Bootstrap CDN**: Used for styling and responsive design.
 
 ## How to Run
@@ -65,12 +72,6 @@ This project provides an **Advanced Mortgage Calculator** that allows users to c
 - **Input Form**: A user-friendly form to input loan and property details.
 - **Results Section**: Displays calculated results dynamically after submitting the form.
 
-## License
-This project is open-source and available under the [MIT License](LICENSE).
-
-## Contributions
-Contributions are welcome. Feel free to fork this repository and submit pull requests with improvements or new features.
-
 ---
 
-Developed by: **Your Name**
+Developed by: **schnaror@gmail.com**
