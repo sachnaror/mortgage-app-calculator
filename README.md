@@ -79,3 +79,6 @@ Developed over ginger tea in weekend by: **schnaror@gmail.com**
 Note:
 
 I always stay away from loan / morgage or credit cards etc, and absolutely hate these instruments apart form just maintaining good CIBIL credit score.
+
+
+![alt text](image.png)
