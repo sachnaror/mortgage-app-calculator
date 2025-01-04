@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Mortgage Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .calculator-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator-container">
+    <h3 class="text-center mb-4">Mortgage Calculator with Loan and Property Adjustments</h3>
+    <form id="mortgageForm">
+        <div class="mb-3">
+            <label for="loanAmount" class="form-label">Loan Amount (USD):</label>
+            <input type="number" id="loanAmount" class="form-control" placeholder="Enter loan amount" required>
+        </div>
+        <div class="mb-3">
+            <label for="interestRate" class="form-label">Annual Interest Rate (%):</label>
+            <input type="number" id="interestRate" class="form-control" placeholder="Enter interest rate" required>
+        </div>
+        <div class="mb-3">
+            <label for="loanTerm" class="form-label">Loan Term (Years):</label>
+            <select id="loanTerm" class="form-select" required>
+                <option value="30">30 Years (Lower monthly, higher interest)</option>
+                <option value="20">20 Years</option>
+                <option value="15">15 Years (Higher monthly, lower interest)</option>
+                <option value="10">10 Years</option>
+                <option value="5">5 Years</option>
+                <option value="2">2 Years</option>
+                <option value="1">1 Year</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="creditScore" class="form-label">Credit Score:</label>
+            <select id="creditScore" class="form-select" required>
+                <option value="0.5">Excellent (740+)</option>
+                <option value="1">Good (680-739)</option>
+                <option value="1.5">Fair (620-679)</option>
+                <option value="2">Poor (<620)</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="propertyType" class="form-label">Property Type:</label>
+            <select id="propertyType" class="form-select" required>
+                <option value="0">Residential</option>
+                <option value="0.1">Commercial</option>
+                <option value="0.15">Investment Property</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="propertyTaxRate" class="form-label">Property Tax Rate (%):</label>
+            <input type="number" id="propertyTaxRate" class="form-control" placeholder="Enter property tax rate" required>
+        </div>
+        <div class="mb-3">
+            <label for="insuranceCost" class="form-label">Annual Home Insurance (USD):</label>
+            <input type="number" id="insuranceCost" class="form-control" placeholder="Enter annual insurance cost" required>
+        </div>
+        <button type="button" id="calculateBtn" class="btn btn-success w-100">Calculate Mortgage</button>
+    </form>
+    <div class="mt-4" id="resultContainer" style="display: none;">
+        <h5>Results:</h5>
+        <p>Adjusted Interest Rate: <span id="adjustedInterestRate"></span>%</p>
+        <p>Monthly Principal & Interest Payment: $<span id="monthlyPayment"></span></p>
+        <p>Monthly Property Tax: $<span id="propertyTax"></span></p>
+        <p>Monthly Home Insurance: $<span id="homeInsurance"></span></p>
+        <p><strong>Total Monthly Payment: $<span id="totalMonthlyPayment"></span></strong></p>
+        <p>Total Loan Cost (Including Interest): $<span id="totalLoanCost"></span></p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('calculateBtn').addEventListener('click', function () {
+        // Get form values
+        const loanAmount = parseFloat(document.getElementById('loanAmount').value);
+        const baseInterestRate = parseFloat(document.getElementById('interestRate').value) / 100;
+        const loanTerm = parseInt(document.getElementById('loanTerm').value);
+        const creditScoreFactor = parseFloat(document.getElementById('creditScore').value);
+        const propertyTypeFactor = parseFloat(document.getElementById('propertyType').value);
+        const propertyTaxRate = parseFloat(document.getElementById('propertyTaxRate').value) / 100;
+        const annualInsurance = parseFloat(document.getElementById('insuranceCost').value);
+
+        // Adjust interest rate based on credit score and property type
+        const adjustedInterestRate = baseInterestRate + creditScoreFactor * 0.005 + propertyTypeFactor;
+
+        // Monthly interest rate and number of payments
+        const monthlyInterestRate = adjustedInterestRate / 12;
+        const numberOfPayments = loanTerm * 12;
+
+        // Monthly principal and interest using the formula: M = P[r(1+r)^n] / [(1+r)^n - 1]
+        const monthlyPrincipalAndInterest = loanAmount * (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) /
+            (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+
+        // Monthly property tax
+        const monthlyPropertyTax = (loanAmount * propertyTaxRate) / 12;
+
+        // Monthly insurance
+        const monthlyInsurance = annualInsurance / 12;
+
+        // Total monthly payment
+        const totalMonthlyPayment = monthlyPrincipalAndInterest + monthlyPropertyTax + monthlyInsurance;
+
+        // Total loan cost
+        const totalLoanCost = monthlyPrincipalAndInterest * numberOfPayments;
+
+        // Update results
+        document.getElementById('adjustedInterestRate').textContent = (adjustedInterestRate * 100).toFixed(2);
+        document.getElementById('monthlyPayment').textContent = monthlyPrincipalAndInterest.toFixed(2);
+        document.getElementById('propertyTax').textContent = monthlyPropertyTax.toFixed(2);
+        document.getElementById('homeInsurance').textContent = monthlyInsurance.toFixed(2);
+        document.getElementById('totalMonthlyPayment').textContent = totalMonthlyPayment.toFixed(2);
+        document.getElementById('totalLoanCost').textContent = totalLoanCost.toFixed(2);
+
+        // Show results
+        document.getElementById('resultContainer').style.display = 'block';
+    });
+</script>
+
+</body>
+</html>
